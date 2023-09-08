@@ -1,5 +1,4 @@
 import React from "react";
-import ProductCard from "../components/ProductCard";
 import { graphql } from "react-relay";
 import Index from "./index";
 import type { pages_indexQueryResponse } from "../__generated__/pages_indexQuery.graphql";
