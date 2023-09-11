@@ -4,7 +4,7 @@ import NavigateComponent from "./NavigateComponent";
 import { Box, Card, CardContent } from "@mui/material";
 
 type IInfoCard = {
-  props: Array<Object>,
+  props: Array<Object>
 };
 
 const InfoCard = (props: IInfoCard) => {

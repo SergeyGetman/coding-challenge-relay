@@ -15,6 +15,12 @@ import "../style/global-style.scss";
 import theme from "../lib/theme";
 import { initEnvironment, createEnvironment } from "../lib/createEnvironment";
 import MainContainer from "../components/MainContainer";
+import {Provider} from "react-redux";
+import store from "../store/store";
+
+import {products} from "./api/products";
+import AppContext from "../store/context";
+
 
 if (!Intl.PluralRules) {
   /* eslint-disable global-require */
@@ -110,44 +116,41 @@ export default class MyApp extends App<InitialProps> {
     );
 
     return (
-      <RawIntlProvider value={intl}>
-        <Head>
-          <meta charSet="utf-8" />
-          <title>Products</title>
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-          />
-        </Head>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <QueryRenderer
-            environment={environment}
-            query={Component.query}
-            variables={pageProps.variables}
-            render={(params) => {
-              const { error, props } = params;
-              if (props && props.viewer) {
-                return (
-                  <Suspense fallback={null}>
-                    <Component
-                      {...pageProps}
-                      environment={environment}
-                      {...props}
-                      locale={locale}
-                    />
-                  </Suspense>
-                );
-              }
+        <RawIntlProvider value={intl}>
+          <Head>
+            {/* ... */}
+          </Head>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AppContext.Provider value={products}>
+              <QueryRenderer
+                  environment={environment}
+                  query={Component.query}
+                  variables={pageProps.variables}
+                  render={(params) => {
+                    const { error, props } = params;
+                    if (props && props.viewer) {
+                      return (
+                          <Suspense fallback={null}>
+                            <Component
+                                {...pageProps}
+                                environment={environment}
+                                {...props}
+                                locale={locale}
+                            />
+                          </Suspense>
+                      );
+                    }
 
-              if (error) {
-                return "Error!";
-              }
-              return "Loading...";
-            }}
-          />
-        </ThemeProvider>
-      </RawIntlProvider>
+                    if (error) {
+                      return "Error!";
+                    }
+                    return "Loading...";
+                  }}
+              />
+            </AppContext.Provider>
+          </ThemeProvider>
+        </RawIntlProvider>
     );
   }
 }
