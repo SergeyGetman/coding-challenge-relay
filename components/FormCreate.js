@@ -14,6 +14,7 @@ import AppContext from "../store/context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { router } from "next/client";
+import useSound from "use-sound";
 
 export function Notify() {
   return <ToastContainer />;
@@ -25,7 +26,9 @@ export const FormCreate = () => {
 
   const [showNotify, setShowNotify] = useState(false);
 
-  const notify = () => toast("Wow so easy!");
+  const [play] = useSound("/boom.mp3");
+
+  const notify = () => toast("item sussed added");
 
   const [formData, setFormData] = useState({
     id: "",
@@ -128,7 +131,7 @@ export const FormCreate = () => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Button type="submit" variant="contained">
+              <Button type="submit" variant="contained" onClick={play}>
                 SAVE
               </Button>
             </form>

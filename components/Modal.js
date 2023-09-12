@@ -8,14 +8,14 @@ type IModal = {
   openModal: boolean,
   onClickEv: () => void,
   closeModal: () => void,
-  dataForEdit: Array<Object>,
+  dataForEdit: Array<Object>
 };
 
 const ModalWindow: FC<IModal> = ({
   openModal,
   onClickEv,
   closeModal,
-  dataForEdit,
+  dataForEdit
 }) => {
   const [play] = useSound("/error.mp3");
 

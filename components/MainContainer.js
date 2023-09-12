@@ -7,7 +7,7 @@ import NavigateComponent from "./NavigateComponent";
 import { AppBar, Box, Container, Toolbar, useMediaQuery } from "@mui/material";
 
 type Props = {
-  +children: React$Node,
+  +children: React$Node
 };
 
 const MainContainer = ({ children }: Props): React$Node => {
@@ -20,7 +20,7 @@ const MainContainer = ({ children }: Props): React$Node => {
           sx={{
             display: "flex",
             width: isMobile ? "100px" : "300px",
-            height: "100%",
+            height: "100%"
           }}
           md={4}
           sm={6}
@@ -38,7 +38,7 @@ const MainContainer = ({ children }: Props): React$Node => {
             <NavigateComponent path="/create" text="Create" />
           </Toolbar>
           <Toolbar sx={{ fontSize: isMobile ? "15px" : "30px" }}>
-            <NavigateComponent path="/infoCard" text="InfoCard" />
+            <NavigateComponent path="/infoCard" text="Products" />
           </Toolbar>
         </AppBar>
 

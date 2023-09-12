@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import MainContainer from "./MainContainer";
 import NavigateComponent from "./NavigateComponent";
 import { Box, Card, CardContent } from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { products } from "../pages/api/products";
+import useSound from "use-sound";
 
 type IInfoCard = {
   props: Array<Object>
 };
 
-const InfoCard = (props: IInfoCard) => {
-  const arrayInfoUser = [...props.props];
+const CardInformationProducts = (props: IInfoCard) => {
+  const [arrayInfoUser, setArrayInfoUser] = useState([...props.props]);
+  const [playEcho] = useSound("/delete.mp3");
+
+  const handleDeleteItem = id => {
+    const updatedArray = arrayInfoUser.filter(el => el.id !== id);
+    playEcho();
+    setArrayInfoUser(updatedArray);
+  };
+
+  useLayoutEffect(() => {}, [arrayInfoUser, handleDeleteItem]);
+
   return (
     <>
       <MainContainer>
@@ -28,6 +41,11 @@ const InfoCard = (props: IInfoCard) => {
                     price: {el.price} <br />
                     created At: {new Date(el.createdAt).toLocaleDateString()}
                   </pre>
+                  <Box className="product-card__cards-icon">
+                    <DeleteForeverIcon
+                      onClick={() => handleDeleteItem(el.id)}
+                    />
+                  </Box>
                 </CardContent>
               </Card>
             </Box>
@@ -38,4 +56,4 @@ const InfoCard = (props: IInfoCard) => {
   );
 };
 
-export default InfoCard;
+export default CardInformationProducts;
