@@ -127,11 +127,18 @@
 
 
   &__cards {
+    display: flex;
+    flex-flow: row wrap;
     background-color: #2f86e3;
     box-shadow: 10px 5px 5px #2f86e3;
     font-family: "Franklin Gothic Demi";
     margin: 10px;
     border-radius: 10px;
+
+    &-icon {
+      order: 999;
+      margin-left: auto;
+    }
   }
 }
 

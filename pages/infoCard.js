@@ -1,11 +1,11 @@
 import React from "react";
-import InfoCard from "../components/InfoCard";
+import CardInformationProducts from "../components/CardInformationProducts";
 import { products } from "./api/products";
 
 const InfoCardGeneral = () => {
   return (
     <>
-      <InfoCard props={products} />
+      <CardInformationProducts props={products} />
     </>
   );
 };
